@@ -64,7 +64,11 @@ function App() {
           <div className="drum-bank">
             {/* <div className="drum-pad" id="q"><audio src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"></audio>"Q" </div> */}
             {audioClips.map((clip) => (
-              <Drum />
+              // <Drum audioClip={clip} key={clip.key} />
+              <button>
+                <audio src={clip.url} id={clip.key} /> 
+                {clip.key} 
+              </button>
             ))}
           </div>
 

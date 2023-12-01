@@ -1,8 +1,18 @@
+// import React from 'react'
 //rafce
 
-const Drum = () => {
+import { AudioClip } from "./types";
+
+interface DrumpProps {
+    audioClip: AudioClip ;
+}
+
+const Drum = ({audioClip}:DrumpProps) => {
   return (
-    <div>Drum</div>
+    <button>
+        <audio src={audioClip.url} id={audioClip.key} /> 
+        {audioClip.key} 
+    </button>
   )
 }
 
