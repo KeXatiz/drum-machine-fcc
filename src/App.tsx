@@ -13,12 +13,12 @@ const audioClips: AudioClip[] = [
   },
   {
     key: "W",
-    url: "https://s3.amazonaws.com/freecodecamp/drums/heater-2.mp3",
+    url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3",
     description: "Heater-2"
   },
   {
     key: "E",
-    url: "https://s3.amazonaws.com/freecodecamp/drums/heater-3.mp3",
+    url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3",
     description: "Heater-3"
   },
   {
@@ -54,7 +54,13 @@ const audioClips: AudioClip[] = [
 ];
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+  //By specifying clip: AudioClip, we provide type information
+  const playSound = (clip:AudioClip) => {
+    const audio = new Audio(clip.url);
+    audio.play();
+  }
+
 
   return (
     <>
@@ -62,11 +68,10 @@ function App() {
           
 
           <div className="drum-bank">
-            {/* <div className="drum-pad" id="q"><audio src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"></audio>"Q" </div> */}
             {audioClips.map((clip) => (
               // <Drum audioClip={clip} key={clip.key} />
-              <button>
-                <audio src={clip.url} id={clip.key} /> 
+              <button className='drum-pad' id={clip.key} key={clip.key} onClick={() => playSound(clip)}>
+                <audio className="clip" src={clip.url} id={clip.key} /> 
                 {clip.key} 
               </button>
             ))}
