@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import './App.css'
 import { AudioClip } from './types'
 
@@ -58,14 +58,14 @@ function App() {
   const playSound = (clip:AudioClip) => {
     // const audio = new Audio(clip.url);
     // audio.play();
-
     (document.getElementById(clip.key) as HTMLAudioElement).play().catch(console.error);
-
 
     //the ! operator is telling Typescript that the value will be non-null
     document.getElementById("display")!.innerText = clip.description;
+    document.getElementById("drum-" + clip.key)?.focus();
   }
 
+  //when press down keys
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     //change to upper case
     const key = e.key.toUpperCase();
@@ -80,22 +80,25 @@ function App() {
   }
 
   return (
-    <>
-      <div className='container' id="drum-machine" onKeyDown={handleKeyDown}>
-          
-          <div className="drum-bank">
-            {audioClips.map((clip) => (
-
-              <button className='drum-pad' id={`drum-${clip.key}`} key={clip.key} onClick={() => playSound(clip)}>
-                <audio className="clip" src={clip.url} id={clip.key} /> 
-                {clip.key} 
-              </button>
-            ))}
-          </div>
-
-          <div id="display"></div>
+<>
+  <div className='container' id="drum-machine" onKeyDown={handleKeyDown}>
+    <h2 className='text-center' style={{color:"white"}}>Drum Machine</h2>
+    <div className='row mt-3'> {/* Center the drum-bank */}
+      <div className="drum-bank text-center">
+        {audioClips.map((clip) => (
+          <button className='drum-pad col-md-3 p-3 m-1 btn btn-secondary' id={`drum-${clip.key}`} key={clip.key} onClick={() => playSound(clip)}>
+            <audio className="clip" src={clip.url} id={clip.key} /> 
+            {clip.key} 
+          </button>
+        ))}
       </div>
-    </>
+    </div>
+
+    <div id="display" className="text-center mt-4" style={{color:'white'}}></div>
+  </div>
+</>
+
+
   )
 }
 
